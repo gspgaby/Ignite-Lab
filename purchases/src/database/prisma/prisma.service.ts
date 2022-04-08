@@ -15,14 +15,15 @@ export class PrismaService
     super();
   }
 
-  async onModuleDestroy() {
+  async onModuleInit() {
     await this.$connect();
   }
-  async onModuleInit() {
+
+  async onModuleDestroy() {
     await this.$disconnect();
   }
 
-  async enableShutDownHooks(app: INestApplication) {
+  async enableShutdownHooks(app: INestApplication) {
     this.$on('beforeExit', async () => {
       await app.close();
     });
